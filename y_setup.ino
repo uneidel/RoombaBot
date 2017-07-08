@@ -66,17 +66,20 @@ void pubsubCallback(char* topic, byte* payload, unsigned int length) {
   JsonObject& root = jsonBuffer.parseObject(json);
   //const char* messagetype  = root["type"];Serial.print("MessageType: ");  Serial.println(messagetype);
   //const char* content   = root["content"];
-  const char* action = root["action"];
-  const char* cmdval = root["cmdval"];
-  
+  String action = root["action"];
+  String cmdval = root["cmdval"];
   Serial.print("action: ");Serial.println(action);
   Serial.print("cmdval: "); Serial.println(cmdval);
 
-  if (action == "gertrud"){
+  if (action== "gertrud"){
+      Serial.println("Starting Roomba");
       SendRoomba(136);
   }
   if(action == "roombacode"){
-    SendRoomba(atoi(cmdval));
+    int n;
+   char carray[6];
+   cmdval.toCharArray(carray, sizeof(carray));
+    SendRoomba(atoi(carray));
   }
   
 }

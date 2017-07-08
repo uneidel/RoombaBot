@@ -6,18 +6,11 @@ void loop() {
  
   CheckTemperature();
   CheckAutomaticRoombaStart();
-
-   
- 
- if((long)(millis() - rolltime) >= 0) {
-
-   //  Do your five minute roll stuff here
-PublishMessage(GetCurrentTempMessage());
-   rolltime += FIVEMIN;
-
+  if((long)(millis() - rolltime) >= 0) {
+     PublishMessage(GetCurrentTempMessage());
+     rolltime += FIVEMIN;
  }
   pubsubclient.loop();
-
 }
 
 void PublishMessage(char* message)
