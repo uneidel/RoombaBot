@@ -1,5 +1,15 @@
-
 /*
+MQTT Roomba Control for iRobot 621 (should also work for other)
+
+Credits for Roomba basic to https://gist.github.com/probonopd/5181021
+For some strange reason only the current implementation works.
+
+Temperature currenlty with BMP180.
+
+First implementation was with Telegram bot library. All bot releated was moved to Nodered.
+
+
+
  IR Remote Control
  129 Left 
  130 Forward 
