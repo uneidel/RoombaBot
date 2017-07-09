@@ -16,7 +16,7 @@ void loop() {
 void PublishMessage(char* message)
 {
   PubSubConnect();
-  pubsubclient.publish("/office/flurboxout",message);
+  pubsubclient.publish(OUT_FEED,message);
 }
 
 char* GetCurrentTempMessage()

@@ -35,7 +35,7 @@ void PubSubConnect() {
     Serial.print("Attempting MQTT connection...");
     if (pubsubclient.connect(clientName,WILL_FEED,1,false, clientName)) {
       
-      pubsubclient.subscribe("/office/flurboxin");
+      pubsubclient.subscribe(IN_FEED);
       Serial.println("connected");
     } 
     else 

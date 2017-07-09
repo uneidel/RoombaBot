@@ -16,12 +16,9 @@ if (SPIFFS.begin()) {
         JsonObject& json = jsonBuffer.parseObject(buf.get());
         json.printTo(Serial);
         if (json.success()) {
-          Serial.println("\nparsed json");
-
-          strcpy(mqtt_server, json["mqtt_server"]);
-          
-        
-        } else {
+          strcpy(mqtt_server, json["mqtt_server"]);                  
+        } 
+        else {
           Serial.println("failed to load json config");
         }
       }

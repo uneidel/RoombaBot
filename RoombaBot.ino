@@ -2,8 +2,6 @@
 #include <FS.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
-#include <UniversalTelegramBot.h>
-#include <EEPROM.h>
 #include <DNSServer.h>            
 #include <ESP8266WebServer.h>    
 #include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager WiFi Configuration Magic
@@ -20,14 +18,14 @@
 
 
 #define clientName "flurbox"
-#define WILL_FEED "/devices"
-#define OUT_FEED "/office/flurboxout"
-#define IN_FEED "/office/flurboxin"
-#define BOT_TOKEN_LENGTH 46
+const char* WILL_FEED="/devices";
+const char* OUT_FEED="/office/flurboxout";
+const char* IN_FEED="/office/flurboxin";
+
 
 const int maxcurtemp = 50;
 bool shouldSaveConfig = false;
-char bot_token[BOT_TOKEN_LENGTH] = "";
+
 
 char mqtt_server[40];
 WiFiClient espClient;
