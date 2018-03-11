@@ -5,7 +5,14 @@ void setup() {
   setupNTP();
   setupIR();
   setupTemp();
-  
+
+    // DS1820 initialisieren mit Auflösung 12 Bit
+  DS1820.begin();
+  DS1820.setResolution(12);
+  // Anzahl DS1820 Sensoren ermitteln 
+  int n = DS1820.getDeviceCount();
+  Serial.print("Anzahl DS1820: ");
+  Serial.println(n, DEC);
   //wifiManager.resetSettings();
   LoadSetup();
 

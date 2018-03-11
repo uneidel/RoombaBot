@@ -29,9 +29,8 @@ if (SPIFFS.begin()) {
   
 }
 void setupIR() 
-{
-  
- pinMode(5, OUTPUT);
+{ 
+  pinMode(5, OUTPUT);
   digitalWrite(5, HIGH);
 }
 
@@ -143,24 +142,8 @@ void roomba_send(int code, uint16_t freq,int pulse, int pbreak,int pdelay, int p
     delay(pdelay);
   }
   Serial.println("");
+}
 
-  /*
-  Serial.print("Raw timings:");
-   for (int z=0; z<length*2; z++) {
-   Serial.print(" ");
-   Serial.print(raw[z]);
-   }
-   Serial.print("\n\n");
-   */
-}
-void CheckAutomaticRoombaStart(){
-
-  
-}
-void CheckTemperature(){
-  
- 
-}
 
 
 

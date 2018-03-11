@@ -1,14 +1,11 @@
-#define FIVEMIN (1000UL * 60 * 5)
-unsigned long rolltime = millis() + FIVEMIN;
+#define KITKAT (1000UL * 60 * 1)
+unsigned long rolltime = millis() + KITKAT;
 
 
 void loop() {
- 
-  CheckTemperature();
-  CheckAutomaticRoombaStart();
   if((long)(millis() - rolltime) >= 0) {
-     PublishMessage(GetCurrentTempMessage());
-     rolltime += FIVEMIN;
+     PublishMessage(GetMeasurement());
+     rolltime += KITKAT;
  }
   pubsubclient.loop();
 }
@@ -16,29 +13,27 @@ void loop() {
 void PublishMessage(char* message)
 {
   PubSubConnect();
+  Serial.println(message);
   pubsubclient.publish(OUT_FEED,message);
 }
 
-char* GetCurrentTempMessage()
+char* GetMeasurement()
 {
 
-  StaticJsonBuffer<400> jsonBuffer;
+  StaticJsonBuffer<500> jsonBuffer;
   JsonObject& root = jsonBuffer.createObject();
-  root["DateTime"] = GetCurrentTime(true);
-  root["Temperature"] = String(bmp.readTemperature());
+  root["dt"] = GetCurrentTime(true);
+  root["SrvT"] = String(bmp.readTemperature());
+  root["SrvP"] = String(bmp.readPressure());
+  root["OutT"] = String(ReadDS1820());
+  
   char buffer[256];
   root.printTo(buffer, sizeof(buffer));
   return buffer;
 }
-
-char* GetJsonMessage(char* message)
-{
-
-  StaticJsonBuffer<400> jsonBuffer;
-  JsonObject& root = jsonBuffer.createObject();
-  root["DateTime"] = GetCurrentTime(true);
-  root["message"] = message;
-  char buffer[256];
-  root.printTo(buffer, sizeof(buffer));
-  return buffer;
+float ReadDS1820(){
+DS1820.requestTemperatures();
+    float t = DS1820.getTempCByIndex(0);
+    return t;
 }
+

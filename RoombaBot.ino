@@ -15,6 +15,8 @@
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
 #include <PubSubClient.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 
 #define clientName "flurbox"
@@ -37,6 +39,9 @@ PubSubClient pubsubclient(espClient);
 IRsend irsend(5); 
 Adafruit_BMP085 bmp;
 
+#define PIN_DS1820  14
+OneWire oneWire(PIN_DS1820);
+DallasTemperature DS1820(&oneWire);
 
 
 
